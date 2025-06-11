@@ -6,12 +6,12 @@ country_sf = geodata::gadm(
   country = "CHE", level = 0,
   path = tempdir()
 ) |> sf::st_as_sf()
-plot(st_geometry(country_sf))
+splot(st_geometry(country_sf))
 country_vect = terra::vect(country_sf)
 
 # 2. Worldpop 100m population count 2020 ----
 pop_100m = terra::rast(
-  "https://data.worldpop.org/GIS/Population/Global_2000_2020_Constrained/2020/BSGM/CHE/che_ppp_2020_constrained.tif"
+  "https://data.worldpop.org/GIS/Population/Global_2015_2030/R2024B/2025/CHN/v1/100m/constrained/chn_pop_2025_CN_100m_R2024B_v1.tif"
 )
 terra::plot(pop_100m)
 
@@ -56,7 +56,7 @@ hillshade_no_pop = terra::ifel(
   NA
 )
 
-# 5. data frames fpr ggplot ----
+# 5. data frames for ggplot ----
 hillshade_df = terra::as.data.frame(
   hillshade_no_pop,
   xy = TRUE,
